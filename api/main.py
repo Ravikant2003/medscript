@@ -39,11 +39,12 @@ def summarize(request: NoteRequest):
     raw = model_module.generate_soap(request.note)
     sections = model_module.parse_soap(raw)
 
-    missing = [k for k, v in sections.items() if not v]
-    if missing:
+    # Fail only if every section is the fallback — the model produced no usable output
+    all_fallback = all(v == "Not documented." for v in sections.values())
+    if all_fallback:
         raise HTTPException(
             status_code=422,
-            detail=f"Model output missing sections: {missing}",
+            detail="Model failed to generate a usable SOAP summary.",
         )
 
     return SOAPResponse(**sections)
