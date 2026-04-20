@@ -60,13 +60,7 @@ Treatment may be needed.
 
 ## 🚀 Live API Demo
 
-### 📥 Request (Swagger UI)
-
-![Swagger UI](assets/swagger_request.png)
-
-### 📤 Response (Structured SOAP Output)
-
-![API Response](assets/swagger_response.png)
+![MedScript API Demo](assets/image.png)
 
 ### Example API Response
 
