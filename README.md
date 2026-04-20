@@ -18,9 +18,11 @@ Evaluated on 50 held-out samples from the `omi-health/medical-dialogue-to-soap-s
 
 ---
 
-## 🧪 Qualitative Comparison (Before vs After Fine-Tuning)
+## 🧪 Qualitative Comparison (Base vs Fine-Tuned)
 
-> Fine-tuning significantly improves structural consistency, completeness, and reduces hallucinated or redundant content in clinical summaries.
+While the base model can generate structured JSON with strong prompting, it often compresses information, mixes sections, and lacks clinical clarity. Fine-tuning improves separation, readability, and actionability.
+
+---
 
 ### Input
 
@@ -34,18 +36,22 @@ oxygen saturation 97%. ECG shows ST elevation in leads II, III and aVF.
 ### ❌ Base Model Output (Zero-Shot, Unstructured)
 
 ```
-Patient has chest pain and hypertension. ECG abnormal. Possible cardiac issue.
-Treatment may be needed.
+{
+  "subjective": "Chest pain for 2 hours described as pressure-like, radiating to left arm; history of hypertension on lisinopril; blood pressure 150/90, heart rate 98, oxygen saturation 97%; ECG shows ST elevation in leads II, III and aVF.",
+  "objective": "ECG shows ST elevation in leads II, III and aVF; BP 150/90, HR 98, SpO2 97%.",
+  "assessment": "Acute Coronary Syndrome (STEMI).",
+  "plan": "Immediate PCI; aspirin, heparin, and beta-blocker administration; further cardiac monitoring; anticoagulation therapy;"
+}
 ```
 
 ### ✅ Fine-Tuned Model Output (Structured SOAP)
 
 ```json
 {
-  "subjective": "45-year-old male presenting with chest pain for 2 hours, described as pressure-like and radiating to the left arm.",
-  "objective": "BP 150/90 mmHg, HR 98 bpm, oxygen saturation 97%. ECG shows ST elevation in leads II, III, and aVF.",
-  "assessment": "Likely acute myocardial infarction (AMI).",
-  "plan": "Administer aspirin, initiate antiplatelet therapy, and consider PCI."
+  "subjective": "The patient reports experiencing chest pain that started two hours ago, described as pressure-like and radiating to the left arm. He has a history of hypertension and is currently taking lisinopril.",
+  "objective": "Vital signs show blood pressure at 150/90 mmHg, heart rate at 98 bpm, and oxygen saturation at 97% on room air. An electrocardiogram (ECG) reveals ST elevation in leads II, III, and aVF.",
+  "assessment": "The patient presents with acute coronary syndrome likely due to myocardial infarction, evidenced by ischemic changes on the ECG. The presence of ST elevation suggests significant myocardial ischemia requiring immediate intervention.",
+  "plan": "Immediate administration of aspirin and clopidogrel, followed by urgent referral to the cardiac catheterization lab for angiography and possible revascularization. Continue monitoring vital signs and adjust medications as needed. Educate the patient on recognizing symptoms of worsening angina and when to seek emergency care. Schedule a follow-up appointment post-procedure to assess recovery and discuss long-term management options including lifestyle modifications and medication adjustments."
 }
 ```
 
