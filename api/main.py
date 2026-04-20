@@ -46,4 +46,4 @@ def summarize(request: NoteRequest):
             detail=f"Model output missing sections: {missing}",
         )
 
-    return SOAPResponse(**sections, raw_output=raw)
+    return SOAPResponse(**sections)
