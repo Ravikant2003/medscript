@@ -4,6 +4,9 @@
 
 Doctors spend 2–3 hours daily writing clinical notes. MedScript automates this by converting raw clinical dialogues into structured SOAP format, directly addressing a real problem that companies like Nuance, Suki, and Ambience Healthcare are building products around.
 
+Dataset used : https://huggingface.co/datasets/omi-health/medical-dialogue-to-soap-summary
+
+
 ---
 
 ## 📊 Results
