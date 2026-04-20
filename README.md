@@ -133,9 +133,16 @@ medscript/
 │   ├── main.py          # FastAPI app with lifespan model loading
 │   ├── model.py         # Inference wrapper (base + LoRA) + SOAP parser
 │   └── schemas.py       # Pydantic request/response models
+├── assets/
+│   └── image.png        # Demo screenshot (Swagger UI)
+├── eval/
+│   └── eval_final.csv   # Evaluation results: base vs fine-tuned ROUGE scores
 ├── notebooks/
 │   ├── fine-tuning.ipynb          # QLoRA training on Kaggle T4
 │   └── evaluation-notebook.ipynb  # ROUGE evaluation: base vs fine-tuned
+├── utils/
+│   ├── formatting.py    # Qwen chat-format helpers
+│   └── soap.py          # SOAP parsing utilities
 ├── requirements.txt
 └── README.md
 ```
